@@ -3,7 +3,7 @@ import GoogleProviders from "next-auth/providers/google";
 
 import {connectToDB} from '@utils/database'
 import User from '@models/user'
-import { notFound } from "@node_modules/next/navigation";
+
 
 
 const handler = NextAuth({
@@ -24,29 +24,23 @@ const handler = NextAuth({
     return session
   },
   async signIn({ profile }) {
-    try{
-
-        await connectToDB()
-
-        //check if a user already exists
-        const userExists = await User.findOne({
-            email:profile.email
-        })
-
-        // if notFound,create a new user
-        if(!userExists){
-            await User.create({
-                email:profile.email,
-                username:profile.name.replace(" ","").toLowerCase(),
-                image:profile.picture
-            })
-        }
-
-
-        return true
-    } catch(err){
-        console.log(err)
-        return false;
+    try {
+      await connectToDB();
+      const userExists = await User.findOne({ email: profile.email });
+      if (!userExists) {
+        console.log("Creating new user:", profile.email);
+        await User.create({
+          email: profile.email,
+          username: profile.name.replace(" ", "").toLowerCase(),
+          image: profile.picture
+        });
+      } else {
+        console.log("User exists:", profile.email);
+      }
+      return true;
+    } catch (err) {
+      console.error("SignIn error:", err);
+      return false;
     }
   }
 
