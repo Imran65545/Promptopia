@@ -44,14 +44,17 @@ const Nav = () => {
             </button>
 
             {session?.user?.image && (
-              <Image
-                src={session.user.image}
-                className="rounded-full"
-                width={37}
-                height={37}
-                alt="profile"
-                priority={true}
-              />
+              <Link href="/profile">
+                <Image
+                  src={session.user.image}
+                  className="rounded-full"
+                  width={37}
+                  height={37}
+                  alt="profile"
+                  priority={true}
+                  style={{ cursor: "pointer" }}
+                />
+              </Link>
             )}
           </div>
         ) : (
@@ -78,14 +81,17 @@ const Nav = () => {
         {session?.user ? (
           <div className='flex'>
             {session?.user?.image && (
-              <Image
-                src={session.user.image}
-                className="rounded-full"
-                width={37}
-                height={37}
-                alt="profile"
-                priority={true}
-              />
+              <Link href="/profile">
+                <Image
+                  src={session.user.image}
+                  className="rounded-full"
+                  width={37}
+                  height={37}
+                  alt="profile"
+                  priority={true}
+                  style={{ cursor: "pointer" }}
+                />
+              </Link>
             )}
 
             {toggleDropdown && (
