@@ -81,17 +81,16 @@ const Nav = () => {
         {session?.user ? (
           <div className='flex'>
             {session?.user?.image && (
-              <Link href="/profile">
-                <Image
-                  src={session.user.image}
-                  className="rounded-full"
-                  width={37}
-                  height={37}
-                  alt="profile"
-                  priority={true}
-                  style={{ cursor: "pointer" }}
-                />
-              </Link>
+              <Image
+                src={session.user.image}
+                className="rounded-full"
+                width={37}
+                height={37}
+                alt="profile"
+                priority={true}
+                style={{ cursor: "pointer" }}
+                onClick={() => setToggleDropdown((prev) => !prev)}
+              />
             )}
 
             {toggleDropdown && (
